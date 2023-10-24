@@ -1,0 +1,109 @@
+###
+@baseUrl = http://localhost:8000/api/v1
+
+
+POST {{baseUrl}}/students/
+Content-Type: application/json
+
+{
+  "name": "test_student"
+}
+
+###
+
+POST {{baseUrl}}/courses/
+Content-Type: application/json
+
+{
+  "name": "test_courses",
+  "students": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20, 21]
+}
+
+###
+
+PATCH  {{baseUrl}}/courses/1/
+Content-Type: application/json
+
+{
+  "name": "test_courses",
+  "students": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+}
+
+###
+# увидеть избранное конкретного пользователя 
+GET {{baseUrl}}/favorites/?user=1
+Content-Type: application/json
+Authorization: Token 775c6c544014d36e7faf6446ae489d508d70db58
+
+{
+  "advertisement": "10"
+}
+
+###
+
+
+admin - 06f8224e207f6c990bd5d750d76c116f2d29a298
+admin2 - 1bb5006e2287cd4dfb39a06fa9aa724dd9e12be3
+bob - 775c6c544014d36e7faf6446ae489d508d70db58
+###
+# примеры API-запросов
+
+# получение объявлений
+GET {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token 775c6c544014d36e7faf6446ae489d508d70db58
+
+###
+
+# создание объявления
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token 775c6c544014d36e7faf6446ae489d508d70db58
+
+{
+  "title": "Шкаф IKEA",
+  "description": "Срочно"
+}
+
+###
+
+# удаление объявления
+DELETE {{baseUrl}}/advertisements/30/
+Authorization: Token 775c6c544014d36e7faf6446ae489d508d70db58
+
+###
+
+# попытка поменять объявление
+PATCH {{baseUrl}}/advertisements/26/
+Content-Type: application/json
+Authorization: Token 1bb5006e2287cd4dfb39a06fa9aa724dd9e12be3
+
+{
+  "status": "CLOSED"
+}
+
+###
+
+# фильтрация по создателю
+GET {{baseUrl}}/advertisements/?creator=2
+Content-Type: application/json
+
+###
+
+# фильтрация по дате
+GET {{baseUrl}}/advertisements/?created_at_after=2020-10-01
+Content-Type: application/json
+
+###
+
+# фильтрация по статусу
+GET {{baseUrl}}/advertisements/?status=CLOSED
+Content-Type: application/json
+
+
+###
+
+# получение всех добавлений в избранное
+GET {{baseUrl}}/favorites/
+Content-Type: application/json
+Authorization: Token 1bb5006e2287cd4dfb39a06fa9aa724dd9e12be3
